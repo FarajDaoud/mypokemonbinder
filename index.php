@@ -32,7 +32,7 @@
       <p>Search by set or use pokedex mode below. Clicking on an image toggles zoom in and zoom out mode. Clicking on the left and right arrows will retrieve the previous or next 18 cards.</p>
       <p>Set: <select ng-model="setCode" ng-change="get_set()"><option value=""></option><option ng-selected='base' ng-repeat="x in sets" value="{{ x.code }}">{{ x.name }}</option></select>
          <button ng-click="pokedex_mode()">Pokedex Mode</button> <label type="text" ng-show="pokedex_on == 'on'">Pokedex Mode: {{pokedex_on}}</label> </p>
-         <p>Search card by name: <input ng-model="searchCard"> <button ng-click="getCardByName()">Search</button></p>
+         <p>Search card by name: <input ng-model="searchCard" update-on-enter> <button id="search_btn" ng-click="getCardByName()">Search</button></p>
     </div>
   </div>
 </div>
@@ -274,6 +274,7 @@ app.controller('cardsCtrl', function($scope, $http){
         }
     }
 
+
     $scope.getCardByName = function(){
     	$('#container_wrapper img').attr('src', "imgs/empty.gif");
         $scope.pokedex_on = 'off';
@@ -294,6 +295,20 @@ app.controller('cardsCtrl', function($scope, $http){
 
     $scope.pokedex_mode();
 });
+
+angular.module('myApp').directive("updateOnEnter", function() {
+            return {
+                restrict: 'A',
+                require: 'ngModel',
+                link: function (scope, elem, attrs, ngModelCtrl) {
+                    elem.bind("keyup",function(e) {
+                        if (e.keyCode === 13) {
+                            $('#search_btn').click();
+                        }
+                    });
+                }
+            }
+        });
 
 </script>
 <script src="js/main.js"></script>
