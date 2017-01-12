@@ -71,7 +71,7 @@ FROM cards c
 join sets s on s.code = c.setCode
 where c.name like concat('%', ? , '%')
 order by s.release_date asc
-limit 0,18
+limit ". ($_POST['start'] - 1).",18;
     "
     );
 
