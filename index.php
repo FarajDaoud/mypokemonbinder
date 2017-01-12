@@ -170,7 +170,7 @@ app.controller('cardsCtrl', function($scope, $http){
         $http({
             method: "POST"
             ,url : "http://www.djamoola.com/mypokemonbook/getcards.php"
-            ,data : "start=" + (s_num + 18) + "&end=" + (e_num + 18) + "&setCode=" + $scope.setCode + "&pokedexMode=" + $scope.pokedex_on
+            ,data : "start=" + (s_num + 18) + "&end=" + (e_num + 18) + "&setCode=" + $scope.setCode + "&pokedexMode=" + $scope.pokedex_on + "&search_card=" + $scope.searchCard
             ,headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
         }).then(function mySucces(response){
             $scope.imgs = response.data.cards;
@@ -188,7 +188,7 @@ app.controller('cardsCtrl', function($scope, $http){
         $http({
             method: "POST"
             ,url : "http://www.djamoola.com/mypokemonbook/getcards.php"
-            ,data : "start=" + (s_num - 18) + "&end=" + (e_num - 18) + "&setCode=" + $scope.setCode + "&pokedexMode=" + $scope.pokedex_on
+            ,data : "start=" + (s_num - 18) + "&end=" + (e_num - 18) + "&setCode=" + $scope.setCode + "&pokedexMode=" + $scope.pokedex_on + "&search_card=" + $scope.searchCard
             ,headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
         }).then(function mySucces(response){
             $scope.imgs = response.data.cards;
@@ -208,7 +208,7 @@ app.controller('cardsCtrl', function($scope, $http){
         $http({
             method: "POST"
             ,url : "http://www.djamoola.com/mypokemonbook/getcards.php"
-            ,data : "start=1&end=18&setCode=" + $scope.setCode + "&pokedexMode=" + $scope.pokedex_on
+            ,data : "start=1&end=18&setCode=" + $scope.setCode + "&pokedexMode=" + $scope.pokedex_on 
             ,headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
         }).then(function mySucces(response){
             $scope.imgs = response.data.cards;
