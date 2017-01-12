@@ -179,8 +179,8 @@ app.controller('cardsCtrl', function($scope, $http){
             $scope.show_left = "yes";
             if(e_num + 18 > 700){
                 $scope.show_right = "no";
-                $scope.show_right_fun();
             }
+            $scope.show_right_fun();
         });
     }
 
@@ -205,10 +205,11 @@ app.controller('cardsCtrl', function($scope, $http){
     $scope.get_set = function(){
         $('#container_wrapper img').attr('src', "imgs/empty.gif");
         $scope.pokedex_on = 'off';
+        $scope.searchCard = '';
         $http({
             method: "POST"
             ,url : "http://www.djamoola.com/mypokemonbook/getcards.php"
-            ,data : "start=1&end=18&setCode=" + $scope.setCode + "&pokedexMode=" + $scope.pokedex_on 
+            ,data : "start=1&end=18&setCode=" + $scope.setCode + "&pokedexMode=" + $scope.pokedex_on + "&search_card=" + $scope.searchCard
             ,headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
         }).then(function mySucces(response){
             $scope.imgs = response.data.cards;
@@ -225,10 +226,12 @@ app.controller('cardsCtrl', function($scope, $http){
         if($scope.pokedex_on == 'on'){
         	$scope.pokedex_on = 'off';
         	$scope.setCode = 'base1';
+            $scope.searchCard = '';
         }
         else{
 	        $scope.pokedex_on = 'on';
 	        $scope.setCode = '';
+            $scope.searchCard = '';
 	    }
         $http({
             method: "POST"
@@ -254,7 +257,10 @@ app.controller('cardsCtrl', function($scope, $http){
     $scope.show_right_fun = function(){
         if($scope.show_right == "no"){
             return false;
-        }else return true;
+        }else if($('img[src="imgs/empty.gif"]').length > 0){
+            return false;
+        }
+        else return true;
     }
 
     $scope.zoom_in = function(id){
@@ -271,9 +277,6 @@ app.controller('cardsCtrl', function($scope, $http){
     $scope.getCardByName = function(){
     	$('#container_wrapper img').attr('src', "imgs/empty.gif");
         $scope.pokedex_on = 'off';
-        if($scope.search_card_by_name == ''){
-        	$scope.search_card_by_name = 'pika';
-        }
         $http({
             method: "POST"
             ,url : "http://www.djamoola.com/mypokemonbook/getcards.php"
