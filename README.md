@@ -1,5 +1,5 @@
 # mypokemonbook
-www.djamoola.com/mypokemonbook
+www.djamoola.com/mypokemonbinder
 
 website I made for my nephews so they can search Pokemon cards by sets, Pokedex mode, or by card name. 
 
